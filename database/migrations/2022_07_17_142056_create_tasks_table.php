@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longText('description');
             $table->date('due_date');
             $table->boolean('completed')->default(false);
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
 
