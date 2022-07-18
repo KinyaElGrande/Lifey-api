@@ -14,6 +14,8 @@ class Label extends Model
         'color',
     ];
 
+    public $timestamps = false;
+
     public function task()
     {
         return $this->belongsTo(Task::class);

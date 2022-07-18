@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('color');
             $table->unsignedBigInteger('task_id')->nullable();
             $table->foreign('task_id')->references('id')->on('tasks');
-            $table->timestamps();
         });
     }
 
