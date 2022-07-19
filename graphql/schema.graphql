@@ -1,0 +1,60 @@
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    user(
+      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
+    ): User @find
+    "List multiple users."
+    users: [User!]! @paginate(defaultCount: 10)
+
+    "list journals"
+    journal(id: ID! @eq): Journal @find
+    journals: [Journal!]! @paginate(defaultCount: 10)
+
+    task(id: ID! @eq): Task @find
+    tasks: [Task!]! @paginate(defaultCount: 10)
+
+    labels: [Label!]! @paginate(defaultCount: 10)
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    journals: [Journal!]! @hasMany
+    tasks: [Task!]! @hasMany
+}
+
+type Journal {
+    id: ID!
+    content: String!
+    createdAt: DateTime!
+    updatedAt: DateTime
+    user: User! @belongsTo
+}
+
+type Task {
+    id: ID!
+    title: String!
+    description: String
+    due_date: Date!
+    completed: Boolean!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    user: User! @belongsTo
+    labels: [Label] @morphMany
+}
+
+type Label {
+    id: ID!
+    name: String!
+    color: String!
+    labellable: Labellable @morphTo
+}
+
+union Labellable = Task
