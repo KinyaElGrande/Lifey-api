@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,6 @@ class LabelFactory extends Factory
         return [
             'name' => $this->faker->word,
             'color' => $this->faker->hexColor,
-            'task_id' => Task::factory(),
         ];
     }
 }
