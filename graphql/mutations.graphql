@@ -9,6 +9,8 @@ type Mutation {
     createTask(input: CreateTaskInput! @spread): Task @create
     updateTask(input: UpdateTaskInput! @spread): Task @update
     deleteTask(input: DeleteTaskInput! @spread): Task @delete
+    "Task labels mutation"
+    attachTaskLabels(input: TaskLabelsInput! @spread): Task @update
 
     "Label mutations"
     createLabel(input: CreateLabelInput! @spread): Label @create
@@ -45,6 +47,15 @@ input UpdateTaskInput {
 }
 input DeleteTaskInput {
     id: ID!
+}
+input TaskLabelsInput {
+    id: ID!
+    labels: CreateLabelBelongsToMany
+}
+input CreateLabelBelongsToMany {
+    create: [CreateLabelInput!]
+    connect: [ID!]
+    sync: [ID!]
 }
 
 "Label Inputs"
