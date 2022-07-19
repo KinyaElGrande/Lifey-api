@@ -1,0 +1,62 @@
+
+type Mutation {
+    "Journal mutations"
+    createJournal(input: CreateJournalInput! @spread): Journal @create
+    updateJournal(input: UpdateJournalInput! @spread): Journal @update
+    deleteJournal(input: DeleteJournalInput! @spread): Journal @delete
+
+    "Task mutations"
+    createTask(input: CreateTaskInput! @spread): Task @create
+    updateTask(input: UpdateTaskInput! @spread): Task @update
+    deleteTask(input: DeleteTaskInput! @spread): Task @delete
+
+    "Label mutations"
+    createLabel(input: CreateLabelInput! @spread): Label @create
+    updateLabel(input: UpdateLabelInput! @spread): Label @update
+    deleteLabel(input: DeleteLabelInput! @spread): Label @delete
+}
+
+"Journal Inputs"
+input CreateJournalInput {
+    content: String! @rules(apply: ["required"])
+    user_id: ID!
+}
+input UpdateJournalInput {
+    id: ID!
+    content: String! @rules(apply: ["required"])
+}
+input DeleteJournalInput {
+    id: ID!
+}
+
+"Task Inputs"
+input CreateTaskInput {
+    title: String! @rules(apply: ["required"])
+    description: String
+    due_date: Date! @rules(apply: ["required"])
+    user_id: ID!
+}
+input UpdateTaskInput {
+    id: ID!
+    title: String! @rules(apply: ["required"])
+    description: String
+    due_date: Date! @rules(apply: ["required"])
+    completed: Boolean!
+}
+input DeleteTaskInput {
+    id: ID!
+}
+
+"Label Inputs"
+input CreateLabelInput {
+    name: String! @rules(apply: ["required"])
+    color: String! @rules(apply: ["required"])
+}
+input UpdateLabelInput {
+    id: ID!
+    name: String! @rules(apply: ["required"])
+    color: String! @rules(apply: ["required"])
+}
+input DeleteLabelInput {
+    id: ID!
+}

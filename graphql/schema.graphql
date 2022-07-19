@@ -4,8 +4,8 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 "Indicates what fields are available at the top level of a query operation."
 type Query {
     user(
-      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
-      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
+        id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+        email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
     ): User @find
     "List multiple users."
     users: [User!]! @paginate(defaultCount: 10)
@@ -58,3 +58,5 @@ type Label {
 }
 
 union Labellable = Task
+
+#import mutations.graphql
