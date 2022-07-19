@@ -16,8 +16,8 @@ class Label extends Model
 
     public $timestamps = false;
 
-    public function task()
+    public function tasks()
     {
-        return $this->belongsTo(Task::class);
+        return $this->morphedByMany(Task::class, 'labellable');
     }
 }

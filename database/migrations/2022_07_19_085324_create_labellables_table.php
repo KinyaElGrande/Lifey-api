@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('labels', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('color');
+        Schema::create('labellables', function (Blueprint $table) {
+            $table->integer('label_id');
+            $table->integer('labellable_id');
+            $table->string('labellable_type');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('labels');
+        Schema::dropIfExists('labellables');
     }
 };

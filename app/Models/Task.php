@@ -13,7 +13,8 @@ class Task extends Model
     protected $fillable = [
         'title',
         'description',
-        'label_id',
+        'due_date',
+        'completed',
     ];
 
     protected $casts = [
@@ -27,6 +28,6 @@ class Task extends Model
 
     public function labels()
     {
-        return $this->hasMany(Label::class);
+        return $this->morphToMany(Label::class, 'labellable');
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->date('due_date');
             $table->boolean('completed')->default(false);
             $table->unsignedBigInteger('user_id')->index();
