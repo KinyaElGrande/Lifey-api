@@ -7,16 +7,18 @@ type Query {
         id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
         email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
     ): User @find
-    "List multiple users."
     users: [User!]! @paginate(defaultCount: 10)
 
-    "list journals"
+    "Journal queries"
     journal(id: ID! @eq): Journal @find
     journals: [Journal!]! @paginate(defaultCount: 10)
 
+    "Task queires"
     task(id: ID! @eq): Task @find
     tasks: [Task!]! @paginate(defaultCount: 10)
 
+    "Label Queries"
+    label(id: ID! @eq): Label @find
     labels: [Label!]! @paginate(defaultCount: 10)
 }
 
@@ -33,8 +35,8 @@ type User {
 type Journal {
     id: ID!
     content: String!
-    createdAt: DateTime!
-    updatedAt: DateTime
+    created_at: DateTime!
+    updated_at: DateTime
     user: User! @belongsTo
 }
 
@@ -44,8 +46,8 @@ type Task {
     description: String
     due_date: Date!
     completed: Boolean!
-    createdAt: DateTime!
-    updatedAt: DateTime!
+    created_at: DateTime!
+    updated_at: DateTime!
     user: User! @belongsTo
     labels: [Label] @morphMany
 }
